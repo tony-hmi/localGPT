@@ -109,6 +109,16 @@ def split_documents(documents: list[Document]) -> tuple[list[Document], list[Doc
                text_docs.append(doc)
     return text_docs, python_docs
 
+def batch_insert_documents(texts, embeddings):
+    batch_size = 1000  # Adjust the batch size as needed
+    for i in range(0, len(texts), batch_size):
+        batch = texts[i:i+batch_size]
+        db = Chroma.from_documents(
+            batch,
+            embeddings,
+            persist_directory=PERSIST_DIRECTORY,
+            client_settings=CHROMA_SETTINGS,
+        )
 
 @click.command()
 @click.option(
@@ -165,12 +175,9 @@ def main(device_type):
 
     # embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME)
 
-    db = Chroma.from_documents(
-        texts,
-        embeddings,
-        persist_directory=PERSIST_DIRECTORY,
-        client_settings=CHROMA_SETTINGS,
-    )
+    
+    # Batch insert the documents
+    batch_insert_documents(texts, embeddings)
    
 
 
