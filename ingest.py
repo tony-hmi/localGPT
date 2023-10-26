@@ -31,7 +31,10 @@ def load_single_document(file_path: str) -> Document:
        loader_class = DOCUMENT_MAP.get(file_extension)
        if loader_class:
            file_log(file_path + ' loaded.')
-           loader = loader_class(file_path)
+           if loader_class == DOCUMENT_MAP.get(".pptx"):
+               loader = loader_class(file_path, include_slide_notes=True)
+           else:
+               loader = loader_class(file_path)
        else:
            file_log(file_path + ' document type is undefined.')
            raise ValueError("Document type is undefined")

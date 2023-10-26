@@ -30,3 +30,11 @@ Streamlit-extras
 
 # Excel File Manipulation
 openpyxl
+
+# markdown
+markdown
+
+# llama-cpp-python
+llama-cpp-python
+
+python-pptx
