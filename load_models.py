@@ -47,6 +47,7 @@ def load_quantized_model_gguf_ggml(model_id, model_basename, device_type, loggin
             "n_ctx": CONTEXT_WINDOW_SIZE,
             "max_tokens": MAX_NEW_TOKENS,
             "n_batch": N_BATCH,  # set this based on your GPU & CPU RAM
+            "verbose": True,
         }
         if device_type.lower() == "mps":
             kwargs["n_gpu_layers"] = 1

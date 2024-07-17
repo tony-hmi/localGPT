@@ -5,8 +5,81 @@ from chromadb.config import Settings
 
 # https://python.langchain.com/en/latest/modules/indexes/document_loaders/examples/excel.html?highlight=xlsx#microsoft-excel
 from langchain.document_loaders import CSVLoader, PDFMinerLoader, TextLoader, UnstructuredExcelLoader, Docx2txtLoader
-from langchain.document_loaders import UnstructuredFileLoader, UnstructuredMarkdownLoader, UnstructuredPowerPointLoader
+from langchain.document_loaders import (
+    UnstructuredFileLoader,
+    UnstructuredMarkdownLoader,
+    UnstructuredPowerPointLoader,
+    BSHTMLLoader,
+    PyPDFLoader,
+    UnstructuredPDFLoader,
+    SRTLoader,
+)
 
+from langchain.document_loaders import PDFMinerPDFasHTMLLoader
+from langchain.docstore.document import Document
+from bs4 import BeautifulSoup
+
+# def custom_pdf_loader(file):
+#     loader = PDFMinerPDFasHTMLLoader(file)
+#     data = loader.load()[0]
+
+#     soup = BeautifulSoup(data.page_content,'html.parser')
+#     content = soup.find_all('div')
+
+#     import re
+#     cur_fs = None
+#     cur_text = ''
+#     snippets = []   # first collect all snippets that have the same font size
+#     for c in content:
+#         sp = c.find('span')
+#         if not sp:
+#             continue
+#         st = sp.get('style')
+#         if not st:
+#             continue
+#         fs = re.findall('font-size:(\d+)px',st)
+#         if not fs:
+#             continue
+#         fs = int(fs[0])
+#         if not cur_fs:
+#             cur_fs = fs
+#         if fs == cur_fs:
+#             cur_text += c.text
+#         else:
+#             snippets.append((cur_text,cur_fs))
+#             cur_fs = fs
+#             cur_text = c.text
+#     snippets.append((cur_text,cur_fs))
+#     # Note: The above logic is very straightforward. One can also add more strategies such as removing duplicate snippets (as
+#     # headers/footers in a PDF appear on multiple pages so if we find duplicates it's safe to assume that it is redundant info)
+
+#     cur_idx = -1
+#     semantic_snippets = []
+#     # Assumption: headings have higher font size than their respective content
+#     for s in snippets:
+#         # if current snippet's font size > previous section's heading => it is a new heading
+#         if not semantic_snippets or s[1] > semantic_snippets[cur_idx].metadata['heading_font']:
+#             metadata={'heading':s[0], 'content_font': 0, 'heading_font': s[1]}
+#             metadata.update(data.metadata)
+#             semantic_snippets.append(Document(page_content='',metadata=metadata))
+#             cur_idx += 1
+#             continue
+
+#         # if current snippet's font size <= previous section's content => content belongs to the same section (one can also create
+#         # a tree like structure for sub sections if needed but that may require some more thinking and may be data specific)
+#         if not semantic_snippets[cur_idx].metadata['content_font'] or s[1] <= semantic_snippets[cur_idx].metadata['content_font']:
+#             semantic_snippets[cur_idx].page_content += s[0]
+#             semantic_snippets[cur_idx].metadata['content_font'] = max(s[1], semantic_snippets[cur_idx].metadata['content_font'])
+#             continue
+
+#         # if current snippet's font size > previous section's content but less than previous section's heading than also make a new
+#         # section (e.g. title of a PDF will have the highest font size but we don't want it to subsume all sections)
+#         metadata={'heading':s[0], 'content_font': 0, 'heading_font': s[1]}
+#         metadata.update(data.metadata)
+#         semantic_snippets.append(Document(page_content='',metadata=metadata))
+#         cur_idx += 1
+
+#     return semantic_snippets
 
 # load_dotenv()
 ROOT_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
@@ -33,7 +106,7 @@ MAX_NEW_TOKENS = CONTEXT_WINDOW_SIZE  # int(CONTEXT_WINDOW_SIZE/4)
 
 #### If you get a "not enough space in the buffer" error, you should reduce the values below, start with half of the original values and keep halving the value until the error stops appearing
 
-N_GPU_LAYERS = 100  # Llama-2-70B has 83 layers
+N_GPU_LAYERS = 0  # Llama-2-70B has 83 layers
 N_BATCH = 512
 
 ### From experimenting with the Llama-2-7B-Chat-GGML model on 8GB VRAM, these values work:
@@ -47,7 +120,9 @@ DOCUMENT_MAP = {
     ".md": UnstructuredMarkdownLoader,
     ".py": TextLoader,
     # ".pdf": PDFMinerLoader,
-    ".pdf": UnstructuredFileLoader,
+    # ".pdf": UnstructuredFileLoader,
+    ".pdf": UnstructuredPDFLoader,
+    # ".pdf": PyPDFLoader,
     ".csv": CSVLoader,
     ".xls": UnstructuredExcelLoader,
     ".xlsx": UnstructuredExcelLoader,
@@ -55,10 +130,13 @@ DOCUMENT_MAP = {
     ".doc": Docx2txtLoader,
     ".ppt": UnstructuredPowerPointLoader,
     ".pptx": UnstructuredPowerPointLoader,
+    ".html": BSHTMLLoader,
+    ".srt": SRTLoader,
 }
 
 # Default Instructor Model
 EMBEDDING_MODEL_NAME = "hkunlp/instructor-large"  # Uses 1.5 GB of VRAM (High Accuracy with lower VRAM usage)
+# EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-l6-v2"
 
 ####
 #### OTHER EMBEDDING MODEL OPTIONS
@@ -100,11 +178,20 @@ EMBEDDING_MODEL_NAME = "hkunlp/instructor-large"  # Uses 1.5 GB of VRAM (High Ac
 # MODEL_ID = "TheBloke/Llama-2-13b-Chat-GGUF"
 # MODEL_BASENAME = "llama-2-13b-chat.Q4_K_M.gguf"
 
-MODEL_ID = "TheBloke/Llama-2-7b-Chat-GGUF"
-MODEL_BASENAME = "llama-2-7b-chat.Q4_K_M.gguf"
+# MODEL_ID = "TheBloke/Llama-2-7b-Chat-GGUF"
+# MODEL_BASENAME = "llama-2-7b-chat.Q4_K_M.gguf"
+
+# MODEL_ID = "TheBloke/zephyr-7B-alpha-GGUF"
+# MODEL_BASENAME = "zephyr-7b-alpha.Q5_K_M.gguf"
+
+MODEL_ID = "TheBloke/zephyr-7B-beta-GGUF"
+MODEL_BASENAME = "zephyr-7b-beta.Q8_0.gguf"
 
 # MODEL_ID = "TheBloke/Mistral-7B-Instruct-v0.1-GGUF"
 # MODEL_BASENAME = "mistral-7b-instruct-v0.1.Q8_0.gguf"
+
+# MODEL_ID = "TheBloke/Mistral-7B-OpenOrca-GGUF"
+# MODEL_BASENAME = "mistral-7b-openorca.Q5_K_M.gguf"
 
 # MODEL_ID = "TheBloke/Llama-2-70b-Chat-GGUF"
 # MODEL_BASENAME = "llama-2-70b-chat.Q4_K_M.gguf"

@@ -1,0 +1,39 @@
+# Natural Language Processing
+langchain
+chromadb
+pdfminer.six
+InstructorEmbedding
+sentence-transformers
+faiss-cpu
+huggingface_hub
+transformers
+protobuf
+auto-gptq
+docx2txt
+unstructured
+unstructured[pdf]
+
+# Utilities
+urllib3
+accelerate
+bitsandbytes
+click
+flask
+requests
+
+# Streamlit related
+streamlit
+Streamlit-extras
+
+# Excel File Manipulation
+openpyxl
+
+# markdown
+markdown
+
+# llama-cpp-python
+llama-cpp-python
+
+python-pptx
+
+# pysqlite3-binary

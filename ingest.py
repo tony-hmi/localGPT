@@ -30,11 +30,14 @@ def load_single_document(file_path: str) -> Document:
        file_extension = os.path.splitext(file_path)[1]
        loader_class = DOCUMENT_MAP.get(file_extension)
        if loader_class:
-           file_log(file_path + ' loaded.')
-           if loader_class == DOCUMENT_MAP.get(".pptx"):
-               loader = loader_class(file_path, include_slide_notes=True)
-           else:
-               loader = loader_class(file_path)
+            file_log(file_path + ' loaded.')
+            if loader_class == DOCUMENT_MAP.get(".pptx"):
+                loader = loader_class(file_path, include_slide_notes=True)
+            # elif loader_class == DOCUMENT_MAP.get(".pdf"):
+            #     loader = loader_class(file_path)
+            #     return loader
+            else:
+                loader = loader_class(file_path)
        else:
            file_log(file_path + ' document type is undefined.')
            raise ValueError("Document type is undefined")
@@ -159,7 +162,7 @@ def main(device_type):
     text_documents, python_documents = split_documents(documents)
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     python_splitter = RecursiveCharacterTextSplitter.from_language(
-        language=Language.PYTHON, chunk_size=880, chunk_overlap=200
+        language=Language.PYTHON, chunk_size=1000, chunk_overlap=200
     )
     texts = text_splitter.split_documents(text_documents)
     texts.extend(python_splitter.split_documents(python_documents))

@@ -1,0 +1,531 @@
+load INSTRUCTOR_Transformer
+max_seq_length  512
+
+
+> Question:
+What is pyrolysis?
+
+> Answer:
+Pyrolysis is a thermal decomposition process that occurs when materials are subjected to high temperatures in the absence or with limited oxygen supply. During pyrolysis, the material undergoes an irreversible chemical reaction that results in the formation of gases and solid residue called char or charred material. The process is endothermic, meaning it requires energy input, and materials that are able to thermally decompose by pyrolysis are often used as thermal protectors in rocket motors or reentry bodies due to their insulating properties. There are three models available in the software Marc to represent pyrolysis decomposition processes: one term Arrhenius model, two term Arrhenius model, and streamline model. Each phase of the pyrolysis, including virgin material, charred material, and gas, requires a separate material definition with specific properties such as mass density, specific heat, thermal conductivity, enthalpy of formation, reference temperature, porosity, permeability, elastic properties, thermal expansion coefficient, and pore pressure-stress effect coefficient (for the solid phases) or specific heat, enthalpy of formation, reference temperature, dynamic viscosity, and molecular weight (for the gas phase). The pyrolysis definition combines these materials into a complete material and defines rules for how properties are combined at different stages of pyrolysis. The advanced method represents pyrolysis through decomposition of the solid material and transport of the produced gas through the solid material, while the one term Arrhenius model considers a single exponential term to describe the pyrolysis reaction rate. The software provides an option to define an alternate model for pyrolysis using the UPYROLSL user subroutine. Coking, or the formation of carbon deposits, is another process associated with pyrolysis and is governed by complex sets of kinetically controlled chemical reactions. The phenomena are neither well understood nor are the associated constants accurately known.
+----------------------------------SOURCE DOCUMENTS---------------------------
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='Pyrolysis_material' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='Pyrolysis Material\nPyrolysis is a thermal decomposition of materials due to high temperature.\n  The material undergoes an irreversible chemical reaction that produces gases.\n  The residual material of the reaction is rich in carbon and is often called char or charred material.\n  The material at the initial state, before any pyrolysis process has occurred,\n  is called virgin material.\n  The pyrolysis is an endothermic reaction and therefore materials that can thermally decompose \n  by pyrolysis are often used as thermal protections in rocket motors or reentry bodies as examples.\nThree models are available in Marc to represent the pyrolysis decomposition process.\n  A model is determined by a decomposition Method and by the analysis class, as explained below.\n  The current help describes the General Properties\n  and the Other Properties frames of the current menu.\nThe Data Method is explained in a separate help.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='A separate material definition must be used for each phase of the pyrolysis: virgin material, charred material, and gas. The required material properties for the solid phases are the mass density, the specific heat, the thermal conductivity, the enthalpy of formation, the reference temperature, the porosity, the permeability, the elastic properties (Young’s modulus, Poisson’s ratio, shear modulus), the thermal expansion coefficient and the pore pressure-stress effect coefficient. For the gas phase, the required material properties are the specific heat, the enthalpy of formation, the reference temperature, the dynamic viscosity, and the molecular weight (Perfect Gas Law Model). The pyrolysis definition combines these materials into the complete material and defines the rules for how the properties are combined for different levels of pyrolysis (for more details see below).' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.docx:
+page_content='The heat equation for a pyrolysis analysis includes the interaction between the gas and the solid by a divergent term of the mass flow rate of gas and includes an enthalpic term representing the energy consumed by the pyrolysis reaction. \n\n\n\nWhere\n\n and    are respectively the effective heat capacity and the effective thermal conductivity of the solid material during pyrolysis. The assumption taken in Marc is that these effective properties evolve linearly between the properties of the material at the virgin state and the material at the charred state. Therefore we define a variable representing the advancement of the pyrolysis called   and defined by the relation \n\n. \n\n\n\n \n\n\n\nThe effective properties are then defined by:' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.docx'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='Advanced Method\n The advanced method represents the pyrolysis process\n  through the decomposition of the solid material and the\n  transport of the gas produced during the pyrolysis process through the solid material.\n  The properties of the solid material during the pyrolysis process evolve from\n  the properties of the material at the virgin state and those of the material\n  at the entirely pyrolyzed state called charred state. \nThe thermodegradable material is considered to be built up by one or several components.\n  The source term of decomposition by pyrolysis is a sum of the source terms of\n  decomposition of each component. Each component has its own reaction speed\n  described by an Arrhenius law as shown below:\n\n\n\n \n (rho law) \n\n\nwhere:\n\n\n\nsource term of decomposition\n[kg/(m3 s)]\n\n\n\nmass density of the solid material in course of pyrolysis\n[kg/m3]\n\n\nNd\nnumber of components in the material\n[]\n\n\n\nvolume fraction of component i\n[]\n\n\n\ndimensionless factor\n[1/s]' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='We have, respectively:\n\n\uf06e The rate of pyrolysis, coking\n\n\uf078p \uf078c \uf02c\n\n\uf06e The drying state\n\n\uf06aw\n\n\uf0b6\uf078c -------- \uf0b6t\n\n=\n\n1 ----------------------------------- \uf072ˆ \uf072ˆ – , s p c*,\n\nc d*,\n\n\uf0b6\uf072ˆ s c c*, , ------------------- \uf0b6t\n\nThe enthalpy of material in the course of pyrolysis function of the densities and enthalpies of virgin and charred material:\n\nHs p vc, ,\n\n=\n\n\uf072ˆ Hs p c*, – , --------------------------------------------------------------------------- –\n\n\uf072ˆ \uf072ˆ\n\nHs p v*, , \uf072ˆ\n\n, s p v*,\n\n, s p c*,\n\n, s p v*,\n\n, s p c*,\n\n.\n\nThe enthalpies, written in upper case, are the absolute enthalpies. They are equal to:\n\nH\n\n=\n\n0 \uf044Hf\n\nh+\n\n=\n\n0 \uf044Hf\n\nT \uf0f2+\n\nT0\n\ncp Td\n\n.\n\n0 \uf044Hf T0 h\n\nis the enthalpy of formation, is an input of the program.\n\nis the temperature of reference for enthalpy of formation, is an input of the program.\n\nis the sensible enthalpy.\n\nCHAPTER 10 Nonstructural Procedure Library' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content="is the convective term representing\n      the interaction between the gas and the solid material. The gradient of temperature\n      makes the matrix to be solved non-symmetric. It is strongly advised to\n      use the non-symmetric solver when the advanced decomposition method is used.\n      This is done in the submenu 'Analysis Options' of the Job menu via the button 'Convective terms'\n      (Jobs -> Analysis Options -> Convective Terms).\n    \n is the enthalpic term. \n and   are respectively\n      the total enthalpy of pyrolysis gas and the total enthalpy of the material during\n      the pyrolysis process. These enthalpies, written in upper case, are the\n      absolute enthalpies. They are equal to the sum of the sensible enthalpy (integral\n      of the specific heat between a reference temperature and the current temperature)\n      and the enthalpy of formation.\n\n  with \n and \n\n\n\nthe density of the material at virgin state\n\n\n\nthe density of the material at charred state" metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.docx:
+page_content='. \n\n\n\n \n\n\n\nThe effective properties are then defined by:\n \n\n\n\n \n\n\n\n \n\n\n\n \n\n \n\n\n\n  and \nWhere the index v refers to the virgin state and c to the charred state.\nBy definition the pyrolysis advancement variable  goes from 0 to 1 during the pyrolysis. The initial value must be entered in the Initial Pyrolysis (Initial Condition) menu.\n\n\n\n\n\n and  are respectively the total enthalpy of pyrolysis gas and the total enthalpy of the material during the pyrolysis process. These enthalpies, written in upper case, are the absolute enthalpies. They are equal to the sum of the sensible enthalpy (integral of the specific heat between a reference temperature and the current temperature) and the enthalpy of formation. \n   \n     with \n     and      \n       is the density of the material at virgin state\n       is the density of the material at virgin state' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.docx'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='set the volume fraction of the inert part (called vfin in the formulas below)\n  inside the material.\n  The effective thermal conductivity, porosity (Darcy Pyrolysis model),\n  permeability (Darcy Pyrolysis model) are a mixture rule\n  between the properties of the inert material and the properties\n  of the material in course of pyrolysis.\n \n  where X stands either for the thermal conductivity, porosity or permeability.\n  The effective heat capacity is defined by:\n if used with the Streamline Pyrolysis model \n if used with the Darcy Pyrolysis model.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='\uf02c\n\n\uf02c\n\n\uf02c\n\n\uf02c s v j, ,\n\n\uf02c s p j, ,\n\nBj Ea j, \uf079j\n\n\uf02c\n\n\uf02c\n\n. If he chooses the\n\nlaw, then he must give:\n\n, s c j,\n\n.\n\nOne can define an alternate model for pyrolysis using the UPYROLSL user subroutine.\n\nCoking The processes considered when the material is heated are very complex. For instance, we can consider the primary pyrolysis chemical reactions producing gases, and the subsequent secondary chemical reactions, between gases, between gases and solid, and between constituents in the solid phase. We focus here on one class of secondary chemical reactions, namely the heterogeneous reactions between gases and porous solid leading to a carbon deposit, known as coking phenomenon.\n\nThe processes mentioned above are governed by complex sets of kinetically controlled chemical reactions, which are neither well known, nor the constants associated with them.\n\n829\n\n830 Marc Volume A: Theory and User Information\n\nOne Term Arrhenius Model' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+----------------------------------SOURCE DOCUMENTS---------------------------
+==================================================
+
+
+> Question:
+What is the Streamline Pyrolysis Model?
+
+> Answer:
+
+The Streamline Pyrolysis Model is a technique used to describe the decomposition of solid material due to thermal processes in materials science and engineering simulations. It takes into account the gas created during pyrolysis, as opposed to other models that ignore it or treat it differently. In this model, the direction of the gas velocity is prescribed by virtual lines called streamlines, which are defined by the user in a specific region called a streamline region. As the gas direction is predefined, no transport equation is required in the model, and the mass density and velocity of the gas cannot be distinguished from each other. The primary unknown variables in this model are the mass flow rate of pyrolysis gas and the temperature. This model assumes that the gas follows predefined streamlines to leave the material, and it is available for planar, axisymmetric, and solid elements using either linear or quadratic interpolation functions. The user must identify which element contains streamlines. The Streamline Pyrolysis Model is mandatory to use when the 'streamline fluid flow pyrolysis model' is selected in Marc, but it can be used in combination with other meshers like the stretch mesher and multizone mesher. However, the definition of a streamline region is still required. The Darcy's law pyrolysis model is an alternative technique used when gas transport occurs based on pore pressure gradients rather than predefined streamlines.
+----------------------------------SOURCE DOCUMENTS---------------------------
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='Streamline Model\nThe Streamline Model uses the Advanced Method to describe\n  the decomposition of the solid material.\n  The pyrolysis gas is taken into account in the analysis.\n  The direction of the gas velocity is given by virtual lines called streamlines.\n  The user must define them in the Toolbox -> Streamline regions menu.\n  As the gas direction is prescribed, no transport equation is required in the model.\n  Therefore, the mass density and the velocity of the gas cannot\n  be distinguished from each other and the variable describing the pyrolysis gas in the\n  Streamline Model is its mass flow rate. \nThe Streamline Model consists of the mass equation and the heat equation.\n  The primary unknown variables are the mass flow rate of pyrolysis gas\n  and the temperature.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='Figure 10-22\n\nClose Up of Leading Edge – Showing nodes\n\n825\n\n826 Marc Volume A: Theory and User Information\n\nPyrolysis Pyrolysis involves the decomposition of materials due to thermal processes. There are two aspects in simulations of these processes: the thermochemical decomposition of the material creating gaseous products and the transport of these gaseous products. The creation of the gas is based on kinematic laws modeling the reaction kinetics of the decomposition and is the same for the two pyrolysis model present in Marc. The transport of gas differentiates the two models called in Marc the streamline model and the Darcy flow model. The choice of these two models is made on the PYROLYSIS parameter.\n\nWe focus here on the Streamline model. The Darcy flow model is explained in the Coupled Diffusion/Thermal analysis chapter.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/strline_region.html:
+page_content="Use For Streamline Fluid Flow\n It is required to activate this option when the 'streamline fluid flow model' is used to model the \ndecomposition of material by pyrolysis. \nIt is required to deactivate this option when the 'streamline fluid flow model' is not used. \nEntrance Mass Flow\nWhen a streamline region is defined to represent an area undergoing pyrolysis" metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/strline_region.html', 'title': 'strline_region'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='(heat equation) \n\n\n\n\n\n is the effective heat capacity of the\n      solid material during pyrolysis. \n      The assumption taken in Marc is that\n      the material properties evolve linearly between the properties of the material\n      at the virgin state and the material at the charred state, based on a \n      variable representing the pyrolysis progress at any point and called\n      . This is defined by a relation between the mass density\n      of the solid at virgin state, charred state and current state of the analysis:\n      .\n      When the Streamline Pyrolysis model is used the effective heat capacity\n      of the solid material is defined by:\n \n      where the index v refers to the virgin state and c to the charred state.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/strline_region.html:
+page_content="The definition of a streamline region is mandatory to use the 'streamline fluid flow pyrolysis model'. \nThe definition of a streamline region is mandatory to use the stretch mesher or the multizone mesher. \nBUT\nThe 'streamline fluid flow pyrolysis model' can be used in combination with other meshers, like the shaver mesher.\nA pyrolysis analysis is not required to use the stretch mesher or multizone mesher. \n     Some materials are not pyrolysable but ablate/erode and therefore require a remeshing criteria \n     which can be the stretch mesher or the multizone mesher and therefore require the definition of a streamline region.\n     The button 'Use For Streamline Fluid Flow' must be deactivated.\nThe Darcy's law pyrolysis model can be used in combination with the stretch mesher or the multizone mesher and \n     therefore requires the definition of a streamline region. The button 'Use For Streamline Fluid Flow' must be deactivated." metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/strline_region.html', 'title': 'strline_region'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='Gas transport\nThe advanced method takes the gas created during the pyrolysis process into account in the analysis.\n  There exist two models in Marc to handle it: the Streamline Model and the Darcy Model.\n  The Streamline Model makes the assumption that the gas follows pre-defined streamlines\n  to go out of the material. The Darcy Model considers that the gas goes out\n  of the material based on the pore pressure gradient.\n  The choice of the model is determined by the analysis class. If the user runs a Thermal analysis\n  then the pyrolysis process will be described by the Streamline model.\n  If the user runs a Thermal/Diffusion analysis then the pyrolysis process will\n  be described by the Darcy model. Both models use the Advanced Decomposition Method\n  to describe the solid material behavior.\nStreamline Model\nThe Streamline Model uses the Advanced Method to describe\n  the decomposition of the solid material.\n  The pyrolysis gas is taken into account in the analysis.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.docx:
+page_content='Variables/formulas used in the pyrolysis.html file:\n\n\n\nThe mass conservation equation for the streamline model yields:\n\n\n\nDarcy \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhere \n\n\t\tis the mass flow rate of pyrolysis gas\n\n\t\tis the mass density of the solid undergoing decomposition\n\n\t\tis the source term of decomposition. \n\nNote that, the gas transport being imposed by the streamlines, no momentum conservation equation are used and therefore the mass flow rate of gas cannot be split in to a gas velocity and a gas density.\n\nThe source term of decomposition is a sum of the source term of decomposition of each component of the composite material. Each component has its own reaction speed described by an Arrhenius law. The source term is then:\n\n\n\nWith \n\n\n\n\tNd\tnumber of components in the material\n\n\t\tvolume fraction of component i\n\n\t\tdimensionless factor\n\n\t\tenergy of activation of the reaction i of decomposition\n\n\tR\tperfect gas constant\n\n\t\tvirgin density of component i\n\n\t\tcharred density of component i' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.docx'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='We focus here on the Streamline model. The Darcy flow model is explained in the Coupled Diffusion/Thermal analysis chapter.\n\nIn the streamline model, the gas moves along streamlines that are aligned with the mesh, as shown in Figure 10-23. This procedure is available for planar, axisymmetric and solid elements using either linear or quadratic interpolation functions. Because the need for regular meshes, triangular and tetrahedral elements are not available. The user must identify which element contain streamlines.\n\nThe streamline method introduces two new terms: streamlines and streamline integration points (SIP). For lower order elements, the SIP are at the intersection of the streamlines and the element edges. For higher order elements, an additional SIP exists midway between the two. The pyrolysis calculation occurs at the SIP. An extrapolation and interpolation procedure is used to move data from the SIP to conventional integration points (CIP). The pyrolysis gas\n\nm·\n\nmoves from' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='The capability is available for two- or three-dimensional analysis using the standard heat transfer continuum elements.\n\nThe primary unknown variables of the model are the gas pressure and the temperature. Marc computes and prints the following information at the element integration points: temperature, pressure, gradient of pressure, mass flow rate of gas, gradient of temperature, and heat flux.\n\n949\n\n950 Marc Volume A: Theory and User Information\n\nDarcy’s Law Pyrolysis Model\n\nAnother application of the coupled diffusion/thermal analysis in Marc is the Darcy’s law model of pyrolysis. The key feature of this model that differentiates it from the pyrolysis streamline model is the use of the Darcy’s law implemented in the diffusion model to represent the pyrolysis gas flow.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/strline_region.html:
+page_content="Definition of the Streamline Region Parameters\nThe Interior and Free surfaces define the orientation of the streamlines.\nWhen the streamline region is used for the 'streamline fluid flow pyrolysis model', \nthey also provide the direction of the mass flow. Mass flows from \nthe Interior surface to the Free surface.\n Interior\n The interior surface is the cool(er) surface. It is displayed in Mentat by default with blue arrows.\nThe interior surface can be defined on Geometry, Mesh or Model Section entities.\nSeveral entities of one type can be selected.\n Free\n The free surface is the surface exposed to the external heat flux. It is where the pyrolysis gas goes out.\nIt is displayed in Mentat by default with red arrows. \nThe free surface can be defined on Geometry, Mesh or Model Section entities.\nSeveral entities of one type can be selected.\nMesh\n Only regular mesh is supported. A regular region is a region where the number" metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/strline_region.html', 'title': 'strline_region'}
+>>>>>>>>>>
+----------------------------------SOURCE DOCUMENTS---------------------------
+==================================================
+
+
+> Question:
+How is the Streamline Pyrolysis Model supported in Marc-Mentat?
+
+> Answer:
+
+The Streamline Pyrolysis Model in Marc-Mentat is supported through the use of advanced methods to describe the decomposition of solid materials due to pyrolysis. In this model, the direction of gas velocity during pyrolysis is prescribed by virtual lines called streamlines, which the user must define in the Toolbox -> Streamline regions menu. Unlike other models, the mass density and velocity of gas cannot be distinguished from each other, and the variable describing the pyrolysis gas in this model is its mass flow rate. The model consists of the mass equation and the heat equation with an interaction term representing the energy consumed by the pyrolysis reaction and a divergent term for the mass flow rate of gas. This model can be selected through the PYROLYSIS parameter, which determines whether the Streamline or Darcy flow model is used in coupled diffusion/thermal analysis. The current help provides detailed information on the General Properties and Other Properties frames of this model, as well as the Data Method, Water Drying Model, and Coking Model options that will be explained in separate helps. Overall, the Streamline Pyrolysis Model in Marc-Mentat enables users to accurately simulate pyrolysis processes by taking into account both the thermochemical decomposition of materials and the transport of gaseous products.
+----------------------------------SOURCE DOCUMENTS---------------------------
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='The capability is available for two- or three-dimensional analysis using the standard heat transfer continuum elements.\n\nThe primary unknown variables of the model are the gas pressure and the temperature. Marc computes and prints the following information at the element integration points: temperature, pressure, gradient of pressure, mass flow rate of gas, gradient of temperature, and heat flux.\n\n949\n\n950 Marc Volume A: Theory and User Information\n\nDarcy’s Law Pyrolysis Model\n\nAnother application of the coupled diffusion/thermal analysis in Marc is the Darcy’s law model of pyrolysis. The key feature of this model that differentiates it from the pyrolysis streamline model is the use of the Darcy’s law implemented in the diffusion model to represent the pyrolysis gas flow.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='(heat equation) \n\n\n\n\n\n is the effective heat capacity of the\n      solid material during pyrolysis. \n      The assumption taken in Marc is that\n      the material properties evolve linearly between the properties of the material\n      at the virgin state and the material at the charred state, based on a \n      variable representing the pyrolysis progress at any point and called\n      . This is defined by a relation between the mass density\n      of the solid at virgin state, charred state and current state of the analysis:\n      .\n      When the Streamline Pyrolysis model is used the effective heat capacity\n      of the solid material is defined by:\n \n      where the index v refers to the virgin state and c to the charred state.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='Gas transport\nThe advanced method takes the gas created during the pyrolysis process into account in the analysis.\n  There exist two models in Marc to handle it: the Streamline Model and the Darcy Model.\n  The Streamline Model makes the assumption that the gas follows pre-defined streamlines\n  to go out of the material. The Darcy Model considers that the gas goes out\n  of the material based on the pore pressure gradient.\n  The choice of the model is determined by the analysis class. If the user runs a Thermal analysis\n  then the pyrolysis process will be described by the Streamline model.\n  If the user runs a Thermal/Diffusion analysis then the pyrolysis process will\n  be described by the Darcy model. Both models use the Advanced Decomposition Method\n  to describe the solid material behavior.\nStreamline Model\nThe Streamline Model uses the Advanced Method to describe\n  the decomposition of the solid material.\n  The pyrolysis gas is taken into account in the analysis.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='Figure 10-22\n\nClose Up of Leading Edge – Showing nodes\n\n825\n\n826 Marc Volume A: Theory and User Information\n\nPyrolysis Pyrolysis involves the decomposition of materials due to thermal processes. There are two aspects in simulations of these processes: the thermochemical decomposition of the material creating gaseous products and the transport of these gaseous products. The creation of the gas is based on kinematic laws modeling the reaction kinetics of the decomposition and is the same for the two pyrolysis model present in Marc. The transport of gas differentiates the two models called in Marc the streamline model and the Darcy flow model. The choice of these two models is made on the PYROLYSIS parameter.\n\nWe focus here on the Streamline model. The Darcy flow model is explained in the Coupled Diffusion/Thermal analysis chapter.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='Streamline Model\nThe Streamline Model uses the Advanced Method to describe\n  the decomposition of the solid material.\n  The pyrolysis gas is taken into account in the analysis.\n  The direction of the gas velocity is given by virtual lines called streamlines.\n  The user must define them in the Toolbox -> Streamline regions menu.\n  As the gas direction is prescribed, no transport equation is required in the model.\n  Therefore, the mass density and the velocity of the gas cannot\n  be distinguished from each other and the variable describing the pyrolysis gas in the\n  Streamline Model is its mass flow rate. \nThe Streamline Model consists of the mass equation and the heat equation.\n  The primary unknown variables are the mass flow rate of pyrolysis gas\n  and the temperature.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='The current help describes the General Properties\n  and the Other Properties frames of the current menu.\nThe Data Method is explained in a separate help.\nThe Water Drying Model and the Coking Model options will be described in a future, separate help.\nGeneral Properties\nTwo methods exist in Marc to represent the decomposition\n  of the solid material by pyrolysis:\n  the Simple Method and the Advanced method.\n  The Simple Method is used in the Simple Pyrolysis Model.\n  The Advanced Method is used in the Streamline Pyrolysis Model and the\n  Darcy Pyrolysis Model.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.docx:
+page_content='The heat equation for a pyrolysis analysis includes the interaction between the gas and the solid by a divergent term of the mass flow rate of gas and includes an enthalpic term representing the energy consumed by the pyrolysis reaction. \n\n\n\nWhere\n\n and    are respectively the effective heat capacity and the effective thermal conductivity of the solid material during pyrolysis. The assumption taken in Marc is that these effective properties evolve linearly between the properties of the material at the virgin state and the material at the charred state. Therefore we define a variable representing the advancement of the pyrolysis called   and defined by the relation \n\n. \n\n\n\n \n\n\n\nThe effective properties are then defined by:' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.docx'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='Pyrolysis Material\nPyrolysis is a thermal decomposition of materials due to high temperature.\n  The material undergoes an irreversible chemical reaction that produces gases.\n  The residual material of the reaction is rich in carbon and is often called char or charred material.\n  The material at the initial state, before any pyrolysis process has occurred,\n  is called virgin material.\n  The pyrolysis is an endothermic reaction and therefore materials that can thermally decompose \n  by pyrolysis are often used as thermal protections in rocket motors or reentry bodies as examples.\nThree models are available in Marc to represent the pyrolysis decomposition process.\n  A model is determined by a decomposition Method and by the analysis class, as explained below.\n  The current help describes the General Properties\n  and the Other Properties frames of the current menu.\nThe Data Method is explained in a separate help.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='The activation of the Darcy pyrolysis model is done through the combination of the PYROLYSIS, 3 parameter and the DIFFUSION parameter.\n\nA standard material must be defined for each phase of the pyrolysis, namely virgin material, charred material, and gas. The required material properties for the solid phases are the mass density, the specific heat, the thermal conductivity, the enthalpy of formation, the reference temperature, the porosity and the permeability. For the gas phase, the required material properties are the specific heat, the enthalpy of formation, the reference temperature, the dynamic viscosity, and the molecular weight (Perfect Gas Law Model). These inputs are entered through the ISOTROPIC, ORTHOTROPIC, or ANISOTROPIC options.\n\nReference to these phases as well as the Arrhenius decomposition law coefficients is done in Mentat by creating a material of type pyrolysis which will write the THERMO-PORE model definition option in the Marc input file.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='Pyrolysis_material' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+----------------------------------SOURCE DOCUMENTS---------------------------
+==================================================
+
+
+> Question:
+How can Water Evaporation be handled in the Streamline Pyrolysis model?
+
+> Answer:
+
+Water evaporation is included in the energy equation of the streamline pyrolysis model through an enthalpic term. The equation becomes:
+
+
+
+ˆ
+
+s i *, cpi
+
+. *T
+
+
+
++
+
+
+
+ˆ
+
+ˆ
+
+cs p*,
+
++
+
+, s c c*, t
+
+–
+
+Hs p vc, ,
+
+
+
+that represents the energy consumed by the pyrolysis reaction.
+
+ An enthalpic term
+
+–
+
+ˆ ------------------- Hc* Hg p, 
+
+, s c c*, t
+
+–
+
+
+
+that represents the energy consumed by the coking reaction.
+
+ An enthalpic term
+
+ˆ -------- Hv Hl t
+
+l
+
+
+
+–
+
+
+
+that represents the energy consumed by the evaporation of the water vapor.
+
+In this enthalpic term, 'Hv' is the latent heat of vaporization of water and 'Hl' is the latent heat of fusion of ice. The equation accounts for the fact that when water evaporates, it absorbs heat from its surroundings, which must be taken into account in the energy balance. When water dries during pyrolysis, this term becomes active to calculate the corresponding energy consumption due to the evaporation process.
+
+The user can input the required properties for water vapor, such as density and diffusion coefficient, in the Water Vapor Material section under Fluid Properties in the Streamline Pyrolysis Model. These properties are then used to calculate the mass flow rate of water vapor through the source term of decomposition '– ˆ s p*, --------------- Hg p,  t', which represents the energy consumed by the evaporation of water vapor.
+
+In summary, water evaporation is handled in the Streamline Pyrolysis model through an enthalpic term that takes into account the latent heat of vaporization and a source term of decomposition to calculate the corresponding mass flow rate of water vapor.
+----------------------------------SOURCE DOCUMENTS---------------------------
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyr_water.html:
+page_content='Water Evaporation Model\n\n\n\nSorry, no help available yet for the water evaporation model.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyr_water.html', 'title': 'Water Evaporation Model'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='is the enthalpy of the water vapor.\n\nis the enthalpy of the liquid water.\n\nThe effective specific heat \uf072ˆ\n\ng w, cp g w, ,\n\none of vapor\n\n:\n\ncp g,\n\nis based upon a mixture law between heat capacity of pyrolysis gas\n\n\uf028\n\n\uf072ˆ\n\ng p, cp g p, ,\n\n\uf029\n\nand the\n\nWe have\n\n\uf072ˆ\n\ngcp g,\n\n=\n\n\uf072ˆ\n\ng p, cp g p, ,\n\n+\n\n\uf072ˆ\n\ng w, cp g w, ,\n\nAnd so\n\ncp g,\n\n=\n\nm· + g w, cp g w, , ------------------------------------------------------------ m· g\n\nm·\n\ng p, cp g p, ,\n\n835\n\n836 Marc Volume A: Theory and User Information\n\nTo take into account the effect of water drying in the material properties, we use the drying state\n\n\uf06aw\n\ndefined above by\n\n\uf06aw\n\n=\n\n1\n\n–\n\n\uf072ˆ l --------- \uf072ˆ l 0,\n\n.\n\nThe effective heat capacity is defined by: \uf072ˆ cp\n\n\uf029 \uf072ˆ cp \uf028\n\n\uf028\n\n\uf029eff\n\n=\n\n1 \uf078p–\uf028\n\n\uf029v\n\n+\n\n\uf078p 1\n\n\uf078c–\uf028\n\n\uf029 \uf072ˆ cp \uf028\n\n\uf029c\n\n+\n\n\uf078p\uf078c \uf072ˆ cp \uf028\n\n\uf029cd\n\n+\n\n1 \uf06aw–\uf028\n\n\uf029\uf072ˆ\n\nl 0, cp l,\n\n.\n\nThe effective conductivity\n\n\uf06c*\n\n=\n\n1 \uf078p–\uf028\n\n\uf029\uf06cv\n\n+\n\n\uf078p 1\n\n\uf078c–\uf028\n\n\uf029\uf06cc\n\n+\n\n\uf078p\uf078c\uf06ccd' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/strline_region.html:
+page_content="Use For Streamline Fluid Flow\n It is required to activate this option when the 'streamline fluid flow model' is used to model the \ndecomposition of material by pyrolysis. \nIt is required to deactivate this option when the 'streamline fluid flow model' is not used. \nEntrance Mass Flow\nWhen a streamline region is defined to represent an area undergoing pyrolysis" metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/strline_region.html', 'title': 'strline_region'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='The conservation of mass equation for the streamline model yields:\n\n\uf0d1.m·\n\ng\n\n=\n\n–\n\n\uf0b6\uf072ˆ s p*, --------------- \uf0b6t\n\n–\n\n\uf0b6\uf072ˆ l -------- \uf0b6t\n\n–\n\n\uf0b6\uf072ˆ s c c*, , ------------------- \uf0b6t\n\nwhere the first term is the conventional generation (source) term due to a change in density of the solid, the second term represent the change in density of initial water vapor, and the final term is due to change in density due to coking.\n\nm· \uf072ˆ \uf072ˆ \uf072ˆ \uf072ˆ s c c *, , \uf075g\n\ng\n\ng\n\ns p*,\n\nl\n\nmass flow rate of the gases of decomposition\n\nmass density of the pyrolysis gas.\n\nmass density of the solid undergoing pyrolysis.\n\nmass density of the liquid vapor.\n\nmass density of the coked solid.\n\nvelocity of the pyrolysis gas.\n\n=\n\n\uf072ˆ\n\ng\n\n\uf075g\n\n.\n\n–\n\n\uf0b6\uf072ˆ s p*, --------------- \uf0b6t\n\nsource term of decomposition.\n\n–\n\n\uf0b6\uf072ˆ , s c c*, ------------------- \uf0b6t\n\nsource term of carbon deposit.\n\n–\n\n\uf0b6\uf072ˆ l -------- \uf0b6t\n\nsource term of water drying.\n\nThe drying of the initial water vapor occurs before the pyrolysis occurs so:\n\n\uf0d1.m·\n\ng w,\n\n–=' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='Show Properties: Diffusion\nFluid Properties\nThe data entered in this frame are the properties used for the pyrolysis gas\n  in the Darcy flow model.\n  The diffusion properties defined in the Gas Material are not used.\n  Note though, that in case of water drying, the properties required for the vapor are entered\n  in the Water Vapor Material.\nSelect the Perfect Gas Law Model\nViscosity: Enter the dynamic viscosity of the pyrolysis gas [(N s)/m2]\nMolecular Weight: Enter the molar mass of the pyrolysis gas [kg/mol]' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='\uf0b6\uf072ˆ -------- Hv Hl \uf0b6t\n\nl\n\n\uf028\n\n–\n\n\uf029\n\nthat represents the energy consumed by the evaporation of the water vapor.\n\nThe equation becomes:\n\n\uf028\n\n\uf072ˆ\n\ns i *, cpi\n\n\uf0d1. \uf06c*\uf0d1T\n\n\uf028\n\n+\n\n\uf029\n\n\uf072ˆ\n\n\uf072ˆ\n\ncs p*,\n\n+\n\ns p*, \uf0b6\uf072ˆ s p*, --------------- Hg p, \uf028 \uf0b6t\n\n+\n\n, s c c*,\n\ncc*\n\n\uf029\n\n–\n\nHs p vc, ,\n\n\uf0b6T ------- \uf0b6t\n\n\uf029\n\n–\n\ncpg p, m·\n\n+ \uf0b6\uf072ˆ ------------------- Hc* Hg p, \uf028\n\ng.\uf044T\n\n=\n\ns c c*, , \uf0b6t\n\n–\n\n\uf029\n\n+\n\n\uf0b6\uf072ˆ -------- Hv Hl \uf0b6t\n\nl\n\n\uf028\n\n–\n\n\uf029\n\nwhere, \uf072ˆ cp \uf028 cp g, \uf06c* Hg p, Hs p vc, , Hv Hl\n\n\uf029eff\n\nis effective heat capacity of the material during the analysis.\n\nis the effective specific heat of the gas (pyrolysis and vapor).\n\nis the effective conductivity of the material during the analysis.\n\nis the enthalpy of the gas, including only gas of decomposition.\n\nis the enthalpy of the solid in course of pyrolysis (no liquid influence).\n\nis the enthalpy of the water vapor.\n\nis the enthalpy of the liquid water.\n\nThe effective specific heat \uf072ˆ\n\ng w, cp g w, ,\n\none of vapor\n\n:\n\ncp g,' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='Streamline Model\nThe Streamline Model uses the Advanced Method to describe\n  the decomposition of the solid material.\n  The pyrolysis gas is taken into account in the analysis.\n  The direction of the gas velocity is given by virtual lines called streamlines.\n  The user must define them in the Toolbox -> Streamline regions menu.\n  As the gas direction is prescribed, no transport equation is required in the model.\n  Therefore, the mass density and the velocity of the gas cannot\n  be distinguished from each other and the variable describing the pyrolysis gas in the\n  Streamline Model is its mass flow rate. \nThe Streamline Model consists of the mass equation and the heat equation.\n  The primary unknown variables are the mass flow rate of pyrolysis gas\n  and the temperature.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='We focus here on the Streamline model. The Darcy flow model is explained in the Coupled Diffusion/Thermal analysis chapter.\n\nIn the streamline model, the gas moves along streamlines that are aligned with the mesh, as shown in Figure 10-23. This procedure is available for planar, axisymmetric and solid elements using either linear or quadratic interpolation functions. Because the need for regular meshes, triangular and tetrahedral elements are not available. The user must identify which element contain streamlines.\n\nThe streamline method introduces two new terms: streamlines and streamline integration points (SIP). For lower order elements, the SIP are at the intersection of the streamlines and the element edges. For higher order elements, an additional SIP exists midway between the two. The pyrolysis calculation occurs at the SIP. An extrapolation and interpolation procedure is used to move data from the SIP to conventional integration points (CIP). The pyrolysis gas\n\nm·\n\nmoves from' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='\uf044t\n\nis the time step\n\n\uf028 \uf078m\n\nend\n\n\uf029\n\n=\n\n\uf028 \uf078m\n\ns tart\n\n\uf029 \uf044\uf078m +\n\nCHAPTER 10 Nonstructural Procedure Library\n\nPresentation of the Energy Equation To take into account pyrolysis and coking and water evaporation in the calculation of the temperature, a convective and three enthalpic terms are added to the standard equation. The phenomena is included in:\n\n\uf06e The convective term by the mass flow rate\n\nm·\n\ng\n\n. The latter decreases during coking because of the mass loss of\n\ngaseous carbon to solid carbon.\n\n\uf06e An enthalpic term\n\n\uf0b6\uf072ˆ s p*, --------------- Hg p, \uf028 \uf0b6t\n\n–\n\nHs p vc, ,\n\n\uf029\n\nthat represents the energy consumed by the pyrolysis reaction.\n\n\uf06e An enthalpic term\n\n–\n\n\uf0b6\uf072ˆ ------------------- Hc* Hg p, \uf028\n\n, s c c*, \uf0b6t\n\n–\n\n\uf029\n\nthat represents the energy consumed by the coking reaction.\n\n\uf06e An enthalpic term\n\n\uf0b6\uf072ˆ -------- Hv Hl \uf0b6t\n\nl\n\n\uf028\n\n–\n\n\uf029\n\nthat represents the energy consumed by the evaporation of the water vapor.\n\nThe equation becomes:\n\n\uf028\n\n\uf072ˆ\n\ns i *, cpi\n\n\uf0d1. \uf06c*\uf0d1T\n\n\uf028\n\n+\n\n\uf029\n\n\uf072ˆ\n\n\uf072ˆ\n\ncs p*,\n\n+' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='Figure 10-22\n\nClose Up of Leading Edge – Showing nodes\n\n825\n\n826 Marc Volume A: Theory and User Information\n\nPyrolysis Pyrolysis involves the decomposition of materials due to thermal processes. There are two aspects in simulations of these processes: the thermochemical decomposition of the material creating gaseous products and the transport of these gaseous products. The creation of the gas is based on kinematic laws modeling the reaction kinetics of the decomposition and is the same for the two pyrolysis model present in Marc. The transport of gas differentiates the two models called in Marc the streamline model and the Darcy flow model. The choice of these two models is made on the PYROLYSIS parameter.\n\nWe focus here on the Streamline model. The Darcy flow model is explained in the Coupled Diffusion/Thermal analysis chapter.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+----------------------------------SOURCE DOCUMENTS---------------------------
+==================================================
+
+
+> Question:
+How can Coking be handled in the Streamline Pyrolysis model?
+
+> Answer:
+
+
+In the Streamline Pyrolysis model, Coking is handled using a kinetic equation that governs the rate of carbon deposition due to coking reactions between gases and porous solid. The quantity K˜_cg represents the mass fraction of carbon in the pyrolysis gas at any time t, and it evolves according to:
+
+  ∂K˜_cg / ∂t = kc_E * exp[(Eac - P) / (RT)]^n * n * c * (K˜_cg * K˜_cgE - K˜_cgE),
+
+where kc_E is the kinetic coefficient for coking reactions, Eac is the activation energy, n is the order of reaction, R is the gas constant, T is the temperature, P is the pressure (assumed to be either 1 or the external pressure), and c is the concentration of cokable species in the pyrolysis gas.
+
+The quantity K˜_cgE represents the mass fraction of carbon in the pyrolysis gas at chemical equilibrium, which can be calculated using standard thermochemical calculation software. The Coking Model option is described in detail in a separate help document (see "Water Drying Model and Coking Model" in the Streamline Pyrolysis model's menu).
+
+It should be noted that if the pressure dependence is neglected (i.e., P=1), then there is no inverse coking reaction that would lead to an increase of carbon in the pyrolysis gas, as stated in the help document for Simple and Advanced Pyrolysis models (see "General Properties" section). However, if the pressure dependence is taken into account (i.e., P=external pressure), then a decrease in pressure can cause carbon redeposition on the solid surface due to decreased solubility of cokable species in the pyrolysis gas.
+
+In summary, Coking is modeled using a kinetic equation for carbon deposition that takes into account the temperature dependence and concentration of cokable species, with an option to specify either pressure independence or dependence on external pressure. This Coking Model allows for a more realistic prediction of the final product properties after pyrolysis, such as residual solid composition and carbon content in the gas phase.
+----------------------------------SOURCE DOCUMENTS---------------------------
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='\uf02c\n\n\uf02c\n\n\uf02c\n\n\uf02c s v j, ,\n\n\uf02c s p j, ,\n\nBj Ea j, \uf079j\n\n\uf02c\n\n\uf02c\n\n. If he chooses the\n\nlaw, then he must give:\n\n, s c j,\n\n.\n\nOne can define an alternate model for pyrolysis using the UPYROLSL user subroutine.\n\nCoking The processes considered when the material is heated are very complex. For instance, we can consider the primary pyrolysis chemical reactions producing gases, and the subsequent secondary chemical reactions, between gases, between gases and solid, and between constituents in the solid phase. We focus here on one class of secondary chemical reactions, namely the heterogeneous reactions between gases and porous solid leading to a carbon deposit, known as coking phenomenon.\n\nThe processes mentioned above are governed by complex sets of kinetically controlled chemical reactions, which are neither well known, nor the constants associated with them.\n\n829\n\n830 Marc Volume A: Theory and User Information\n\nOne Term Arrhenius Model' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='If the temperature is decreasing, the coking is stopped and cg\n\nretains its last value. This forbids the inverse\n\ncoking reaction that would lead to an increase of carbon in the pyrolysis gas.\n\nFor temperatures larger than the equilibrium temperature, there is no more chemical reaction: Figure 10-25 illustrates this:\n\nK˜\n\ncg\n\n=\n\nK˜\n\ncgE\n\n.\n\nThe user can also specify a coking model through the UCOKSL user subroutine.\n\n831\n\n832 Marc Volume A: Theory and User Information\n\nKcg\n\nKcg(Tl)=\n\n~ cgK\n\n0\n\nKcgE\n\nTlow\n\nThigh=TE\n\nTemperature\n\nFigure 10-25\n\nCalculation of Mass Fraction of Carbon in Pyrolysis Gas by Linear Function of Temperature\n\nWater Drying Model\n\nThe water drying model chosen for the streamline model is based upon the same principle than the pyrolysis one, namely an Arrhenius law.\n\nWritten in function of the liquid mass density variable\n\n\uf072ˆ\n\nl\n\n, the Arrhenius law for water drying is:\n\n\uf0b6\uf072ˆ l -------- \uf0b6t\n\n–=\n\nBw*\n\nexp\n\n\uf0e6 –\uf0e8\n\nEw \uf0f6 *\uf072ˆ ----------- \uf0f8 R*T\n\nl 0,\n\n\uf0e6 \uf0e7 \uf0e8' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='Beside this Arrhenius model to calculate the mass fraction of carbon in the pyrolysis gas, a linear model is proposed.\n\nLinear Model\n\nThis model determines the mass fraction of carbon in the pyrolysis gas as a function of the temperature. The evolution is linear from a low temperature where the pyrolysis gas has an excess of carbon to a higher temperature where it is in equilibrium:\n\n1. For temperatures below the low temperature Tl\n\n, there is no coking:\n\nK˜\n\ncg\n\n=\n\nK˜\n\ncg Tl \uf028\n\n\uf029\n\n.\n\n2. For temperatures between the low temperature and the equilibrium one:\n\nIf the temperature is increasing, cg\n\nIf the temperature is increasing, cg\n\nis a linear function of temperature. ((2))\n\nIf the temperature is decreasing, the coking is stopped and cg\n\nIf the temperature is decreasing, the coking is stopped and cg\n\nretains its last value. This forbids the inverse\n\ncoking reaction that would lead to an increase of carbon in the pyrolysis gas.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='\uf06e Either neglect the pressure dependence, by setting\n\nP\n\nequals to 1\n\n\uf06e Assume that\n\nP\n\nis equal to the external pressure.\n\nIn the current implementation the pressure\n\nP\uf028\n\n\uf029\n\n=\n\n1.0\n\n.\n\nCHAPTER 10 Nonstructural Procedure Library\n\nWhen using the Darcy law model, the pressure to be considered will be the calculated pore pressure.\n\nRemarks\n\nThe quantity\n\nK˜\n\ncg\n\nwill always be between\n\nK˜\n\ncg0\n\nand\n\nK˜\n\ncgE\n\n, and its variation rate will approach zero when\n\nK˜\n\ncg\n\nbecomes\n\nclose to\n\nK˜\n\ncgE\n\n.\n\nBased upon the assumption made in this analysis that the coking only begins when the material is completely pyrolysed, we control the coking area by the advancement of the pyrolysis. Coking occurs if the advancement variable of pyrolysis at this location is bigger than a critical value, named “pyrmax”. It is usually just smaller than 1., which means that pyrolysis is over. This may be defined through the THERMO-PORE option; the default is 0.96.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='We have, respectively:\n\n\uf06e The rate of pyrolysis, coking\n\n\uf078p \uf078c \uf02c\n\n\uf06e The drying state\n\n\uf06aw\n\n\uf0b6\uf078c -------- \uf0b6t\n\n=\n\n1 ----------------------------------- \uf072ˆ \uf072ˆ – , s p c*,\n\nc d*,\n\n\uf0b6\uf072ˆ s c c*, , ------------------- \uf0b6t\n\nThe enthalpy of material in the course of pyrolysis function of the densities and enthalpies of virgin and charred material:\n\nHs p vc, ,\n\n=\n\n\uf072ˆ Hs p c*, – , --------------------------------------------------------------------------- –\n\n\uf072ˆ \uf072ˆ\n\nHs p v*, , \uf072ˆ\n\n, s p v*,\n\n, s p c*,\n\n, s p v*,\n\n, s p c*,\n\n.\n\nThe enthalpies, written in upper case, are the absolute enthalpies. They are equal to:\n\nH\n\n=\n\n0 \uf044Hf\n\nh+\n\n=\n\n0 \uf044Hf\n\nT \uf0f2+\n\nT0\n\ncp Td\n\n.\n\n0 \uf044Hf T0 h\n\nis the enthalpy of formation, is an input of the program.\n\nis the temperature of reference for enthalpy of formation, is an input of the program.\n\nis the sensible enthalpy.\n\nCHAPTER 10 Nonstructural Procedure Library' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='and the value of\n\nat chemical equilibrium, and that the rate with which chemical\n\ncg\n\ncgE\n\nthe following kinetic equation for the evolution of the quantity\n\nK˜\n\ncg\n\nis proposed:\n\n\uf0b6K˜ c g ------------- \uf0b6t\n\n–=\n\nkc\n\nexp\n\n\uf0e6 \uf0e8\n\nEac – \uf0f6 P\uf028 ------------ \uf0f8 RT\n\n\uf029\n\nn\n\nc K˜ \uf028\n\ncg K˜ –\n\ncgE\n\n\uf029\n\nn\n\nc\n\nwith:\n\nkc Eac nc K˜ : K˜\n\n\uf02c\n\n\uf02c\n\nc g\n\n:\n\nc gE\n\n:\n\nkinetic coefficients for coking reactions.\n\ntotal mass fraction of the atomic element carbon in the pyrolysis gas.\n\ntotal mass fraction of the atomic element carbon in the pyrolysis gas when chemical equilibrium is achieved.\n\nThe quantity\n\nK˜\n\ncgE\n\ncan be calculated using standard thermochemical calculation software.\n\nThe streamline model does not give access to the value of the local pressure\n\nP\n\n. There are two assumptions that can be made:\n\n\uf06e Either neglect the pressure dependence, by setting\n\nP\n\nequals to 1\n\n\uf06e Assume that\n\nP\n\nis equal to the external pressure.\n\nIn the current implementation the pressure\n\nP\uf028\n\n\uf029\n\n=\n\n1.0\n\n.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html:
+page_content='The current help describes the General Properties\n  and the Other Properties frames of the current menu.\nThe Data Method is explained in a separate help.\nThe Water Drying Model and the Coking Model options will be described in a future, separate help.\nGeneral Properties\nTwo methods exist in Marc to represent the decomposition\n  of the solid material by pyrolysis:\n  the Simple Method and the Advanced method.\n  The Simple Method is used in the Simple Pyrolysis Model.\n  The Advanced Method is used in the Streamline Pyrolysis Model and the\n  Darcy Pyrolysis Model.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyrolysis.html', 'title': 'Pyrolysis_material'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='The conservation of mass equation for the streamline model yields:\n\n\uf0d1.m·\n\ng\n\n=\n\n–\n\n\uf0b6\uf072ˆ s p*, --------------- \uf0b6t\n\n–\n\n\uf0b6\uf072ˆ l -------- \uf0b6t\n\n–\n\n\uf0b6\uf072ˆ s c c*, , ------------------- \uf0b6t\n\nwhere the first term is the conventional generation (source) term due to a change in density of the solid, the second term represent the change in density of initial water vapor, and the final term is due to change in density due to coking.\n\nm· \uf072ˆ \uf072ˆ \uf072ˆ \uf072ˆ s c c *, , \uf075g\n\ng\n\ng\n\ns p*,\n\nl\n\nmass flow rate of the gases of decomposition\n\nmass density of the pyrolysis gas.\n\nmass density of the solid undergoing pyrolysis.\n\nmass density of the liquid vapor.\n\nmass density of the coked solid.\n\nvelocity of the pyrolysis gas.\n\n=\n\n\uf072ˆ\n\ng\n\n\uf075g\n\n.\n\n–\n\n\uf0b6\uf072ˆ s p*, --------------- \uf0b6t\n\nsource term of decomposition.\n\n–\n\n\uf0b6\uf072ˆ , s c c*, ------------------- \uf0b6t\n\nsource term of carbon deposit.\n\n–\n\n\uf0b6\uf072ˆ l -------- \uf0b6t\n\nsource term of water drying.\n\nThe drying of the initial water vapor occurs before the pyrolysis occurs so:\n\n\uf0d1.m·\n\ng w,\n\n–=' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='source term of carbon deposit.\n\n–\n\n\uf0b6\uf072ˆ l -------- \uf0b6t\n\nsource term of water drying.\n\nThe drying of the initial water vapor occurs before the pyrolysis occurs so:\n\n\uf0d1.m·\n\ng w,\n\n–=\n\n\uf0b6\uf072ˆ l -------- \uf0b6t\n\nThe global mass equation is defined as the sum of these. The global mass flow rate\n\nm·\n\ng\n\nis equal to\n\nm·\n\ng p,\n\n+\n\nm·\n\ng w,\n\n.\n\nPrinciple of Pyrolysis\n\nWhen pyrolysis occurs, the solid material is degraded due to the effect of the temperature. This degradation is done in steps (Figure 10-24), according to the temperature. We represent these steps on the drawing below. With each step a loss of density\n\ncorresponds:\n\n\uf044\uf072ˆ\n\n, s p j,\n\n.\n\n827\n\n828 Marc Volume A: Theory and User Information\n\n\uf072ˆ\n\ns\n\n\uf072ˆ\n\n, s p v,\n\n\uf044\uf072ˆ\n\n, s p 1,\n\n\uf044\uf072ˆ\n\n, s p 3,\n\n\uf072ˆ\n\n, s p c,\n\nTemperature\n\nFigure 10-24\n\nDegradation Steps\n\n\uf072ˆ\n\n\uf072ˆ\n\n\uf072ˆ\n\nThe density of material , s p v, pyrolyzed material). If coking occurs the density increases because carbon is redeposited in the solid\n\nthus varies from\n\n, density of virgin material to' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyr_coking.html:
+page_content='Coking Model\n\n\n\nSorry, no help available yet for the coking model.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/pyr_coking.html', 'title': 'Coking Model'}
+>>>>>>>>>>
+----------------------------------SOURCE DOCUMENTS---------------------------
+==================================================
+
+
+> Question:
+What is formulation of the Surface Energy Balance?
+
+> Answer:
+
+The Surface Energy Balance formulation in the context of Surface Energy from Marc Volume A: Theory and User Information is summarized by the following equation:
+
+Enthalpy flow associated with energy given to the surface by impacting particles (fraction of converted kinetic energy) + Radiative balance (balance of radiative heat flux resulting from absorption and emission) - Conduction (apparent conductive flow within the material) - Enthalpy flow due to external chemical species diffusion effects + Enthalpy flow due to thermochemical ablation by gases + Enthalpy flow due to internal thermal decomposition products flow - Enthalpy flow due to blowing of gaseous products + Enthalpy flow due to thermochemical ablation by impacting particles + Thermal effects of mechanical erosion by impacting particles - Enthalpy flow due to mechanical removal of liquid phases at the surface = 0
+
+The contributions to this balance are:
+
+1. Convection (heat transfer coefficient multiplied by the normalized mass flow rate of solid material thermochemically ablated by external gases, with or without blowing correction)
+2. Diffusion (mass flow rate of material thermochemically ablated by external gases due to molecular diffusion)
+3. Radiative balance (balance of radiative heat flux resulting from absorption and emission)
+4. Conduction (apparent conductive flow within the material)
+5. Decomposition (enthalpy flow due to internal thermal decomposition products flow)
+6. Ablation by gases (mass flow rate of material thermochemically ablated by external gases)
+7. Flow (enthalpy flow due to blowing of gaseous products)
+8. Ablation by particles (mass flow rate of material thermochemically ablated by the action of impacting particles)
+9. Surface recession due to mechanical erosion by impacting particles (thermal effects of mechanical erosion by impacting particles)
+10. Mechanical removal of liquid phases at the surface (enthalpy flow due to mechanical removal of liquid phases at the surface)
+
+The heat flux calculations are performed for both the surface and wall regions, and the Surface Energy Balance is coupled with the conductive heat flux into the material. The contributions not relevant to the specific analysis or model can be set to zero.
+----------------------------------SOURCE DOCUMENTS---------------------------
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/surface_energy.html:
+page_content='Surface_energy\n\n\n\nSurface Energy\nThe Surface Energy option is a detailed manner to define\n  the heat flux at the surface. Most important effects\n  involved in a boundary layer are represented: \n    the effect due to convection,\n    the effect due to molecular diffusion,\n    the effect due to the thermochemical ablation\n      of the material due to heterogeneous chemical\n      reactions with external gases,\n    the effect due to the internal decomposition gases,\n    the effect due to the evacuation of gases freed both\n      by thermochemical ablation at the surface and\n      internal thermal decomposition,\n    the effect due to the thermochemical ablation\n      and mechanical erosion\n      of the material due to heterogeneous chemical\n      reactions with impacting particles,\n    the effect due to the liquid phase removal.\nThis is expressed in equations as:' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/surface_energy.html', 'title': 'Surface_energy'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='surface\n\nwall\n\nconduction\n\ndecomposition\n\nablation by gases\n\nablation by particles\n\nFigure 10-4\n\nSchema of the Surface Energy Balance\n\nThe surface energy balance is summarized by this equation:\n\nConvection + Enthalpy flux due to external chemical species diffusion effects + Enthalpy flux due to thermochemical ablation by gases + Enthalpy flux due to internal thermal decomposition products flow – Enthalpy flux due to blowing of gaseous products + Enthalpy flux due to thermochemical ablation by impacting particles + Thermal effects of mechanical erosion by impacting particles – Enthalpy flux due to mechanical removal of liquid phases at the surface + Radiative heat transfer balance – Thermal conduction = 0\n\nCHAPTER 10 Nonstructural Procedure Library\n\nMathematical Presentation\n\nThe equation below is noted\n\nx t Ts m· ,, , \uf028 , \uf046liq x t Ts m· , ,, \uf028 l j, \uf029 \uf046cond x t Ts ,, \uf028 –\n\n\uf029 \uf046g x t Ts m· + ,, , \uf028 s th, x t Ts m· + ,, \uf046s th p, \uf029 \uf028 , ,, 0= \uf029\n\ng p, m· , g w, , p j, \uf0bc,' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='Surface Energy The SURFACE ENERGY option calculates contributions to the thermal boundary conditions, including the recession due to thermochemical ablation at the surface of a material which is subjected to very high thermal fluxes. This includes the effects of convective heat flux with a possible blowing effect by mass injection, an enthalpy flux due to molecular diffusion, a thermochemical ablation due to heterogeneous chemical reactions with gases, a possible thermal internal decomposition, a thermochemical ablation and a mechanical erosion by liquid or solid particles impacts. Surface energy allows one to obtain the recession due to thermochemical ablation by gases or particles. The mechanical erosion must be calculated by use of a UFLUXMEC user subroutine, and added to the thermochemical ablation in order to obtain the total surface recession. Surface energy is coupled with the heat transfer into the material by the conductive heat flux, and possibly with the mass flow rate' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='The SURFACE ENERGY option may be used in any heat transfer analysis, but depending on the model, some terms could be null. When used in conjunction with the THERMO-PORE option for materials undergoing pyrolysis, most of the terms are nonzero.\n\nThe PRINT,15 parameter allows the printing of each contribution to the surface energy.\n\nPhysical Presentation\n\nconvection\n\ndiffusion\n\nradiative balance\n\nblowing\n\nparticles impact\n\nflow\n\nsurface\n\nwall\n\nconduction\n\ndecomposition\n\nablation by gases\n\nablation by particles\n\nFigure 10-4\n\nSchema of the Surface Energy Balance\n\nThe surface energy balance is summarized by this equation:' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='enthalpy flow associated with energy given to the surface by impacting particles (fraction of conversed kinetic energy).\n\nRadiative balance:\n\nbalance of radiative heat flux, resulting from absorption and emission.\n\nConduction:\n\napparent conductive flow within the material.\n\nH\n\nEach time that a upper-case enthalpy and the so-called sensible enthalpy. If we refer only to the sensible part, a lower-case\n\nis used for an enthalpy, it means that is the total enthalpy, including both the formation is used. In all cases, we\n\nh\n\nrefer to specific enthalpies\n\nJ.kg 1–\n\n.\n\nEquation of Each Term of the Energy Balance:\n\nConvection:\n\n\uf0e6 \uf0e8\n\n\uf061H Hrec He\n\n–\n\nT\n\ns \uf0f6 \uf0f8\n\n803\n\n804 Marc Volume A: Theory and User Information\n\nwith:\n\n\uf061H\n\n=\n\n\uf061H x t Ts \uf028\n\n,,\n\n\uf029\n\nheat transfer coefficient (homogeneous with surface mass flow rate kg.m 2– .s 1– \uf061H \uf05b \uf05b \uf072eueCH as flow rate of the external flow parallel to the surface at the edge\n\nJ.kg 1–\n\n\uf05d , with\n\n\uf05d\n\n/specific enthalpy\n\n). In some papers,' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content="th\n\ncan come from mass flow rates of solid material caused by external gases or\n\nAblation due to external gases\n\nThe mass flow rate of material thermochemically ablated by external gases is equal to\n\nthe normalized mass flow rate of solid material thermochemically ablated by external gases and coefficient.\n\nm·\n\n, s th g,\n\n= \uf061M\n\nB'c\uf061M\n\nB'c is the diffusion\n\n; where\n\nis\n\nIf the blowing correction is not active then where\n\n\uf061M\n\n=\n\n\uf061M0\n\nwhere\n\n\uf061M0\n\nis the input for the diffusion coefficient.\n\nIf the blowing correction is active then\n\n\uf061M\n\n=\n\n\uf061M0\n\nLn 1 2KB'V \uf029 ---------------------------------------- 2KB'V\n\n+\uf028\n\nwhere\n\nB'V\n\ndepends on different mass flow rates of\n\nablated or eroded solid material as defined in the 'convection' contribution of the Surface Energy Balance.\n\nAblation due to impacting particles\n\nThe mass flow rate of material thermochemically ablated by the action of impacting particles is equal to\n\nm·\n\n, s th p,\n\n." metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='p\n\nand temperature\n\nT\n\ncan\n\n\uf072ˆ g ----- p\n\n\uf0b6p ------ \uf0b6t\n\n–\n\n\uf072ˆ g ----- T\n\n\uf0b6T ------ \uf0b6t\n\n–\n\n\uf0e6 div \uf072g \uf0e8\n\n\uf06b \uf0f6 ------ \uf0d1p \uf0f8 \uf06dg\n\n–=\n\n\uf0e6 \uf0e7 \uf0e8\n\n1\n\n+\n\n\uf072g\n\n\uf0f6 \uf0b6\uf072ˆ \uf066v \uf066c– s -------- ------------------ \uf0f7 \uf072ˆ \uf072ˆ \uf0b6t \uf0f8 c–\n\n\uf06e\n\nBalance Relations For Energy\n\nThe total enthalpy (i.e., energy content) per unit mass for any of the materials is the sum of the sensible enthalpy and the enthalpy of formation:\n\nHx\n\n=\n\n+ hx \uf044Hx\n\nThe sensible enthalpy is determined with respect to some reference temperature:\n\nhx T\uf028\n\n\uf029\n\n=\n\nT\n\nT \uf0f2 r ef\n\ncpx Td\n\n,\n\nwhere\n\ncpx\n\nis the specific heat at constant pressure.\n\nThe enthalpy of the solid in volume element\n\ndV\n\ncan be written as:\n\n\uf072sHsdVs\n\n=\n\n\uf072cHc 1\n\n\uf066c–\uf028\n\n\uf029dVc\n\n+\n\n\uf072vHv 1\n\n\uf066v–\uf028\n\n\uf029dVv\n\nor \uf072ˆ\n\nsHsdV\n\n=\n\n\uf05b\n\n\uf072ˆ\n\ncHcx\n\n+\n\n\uf072ˆ\n\nvHv 1\n\nx–\uf028\n\n\uf029\n\n\uf05ddV\n\nThe enthalpy of the gas in the pores of volume element\n\ndV\n\ncan be written as:\n\n\uf072gHgdVg\n\n=\n\n\uf072ˆ\n\ngHgdV\n\nThe total enthalpy inside the control volume therefore is:\n\n955\n\n956 Marc Volume A: Theory and User Information\n\nH\n\n\uf0f2= A\n\n\uf028\n\n\uf072ˆ\n\ngHg\n\n+' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content="g p\uf02c\n\n+\n\nm1 B'C\uf061M m· +\n\ncontributes to the heat flux though the blowing contribution:\n\nm·\n\n–\n\n.\n\ns th p \uf02c\n\n\uf02c\n\nl\n\nIf the liquid phase removal contribution is based on different liquid phases:\n\n\uf0e5\n\nm·\n\n1H1\n\nm1\n\n=\n\nm·\n\n1 x t, \uf028\n\n\uf029\n\nsurface mass flow rate of liquid products formed at the surface of the material, and blowed out by the action of the external flow or other mechanisms\n\nkg.m 2– .s 1–\n\n\uf028\n\n\uf05b\n\n\uf05d\n\n\uf029\n\n.\n\nH1\n\n=\n\nH1 Ts \uf028\n\n\uf029\n\nspecific enthalpy of the liquid phase 'l' taken into account in, evaluated at the surface temperature Ts\n\nJ.kg 1–\n\n\uf028\n\n\uf05b\n\n\uf05d\n\n\uf029\n\n.\n\nThis term takes into account possible liquid phases appearing at the surface of the ablating material, by several mechanisms (phase change of a component of the material [silica, …], oxidation at the surface of gaseous products coming from the , for instance), and the blowing of these phases (gravity, shear stress, …). inside forming liquid phase\n\nSiOg\n\nSiO2\n\n\uf05b\n\n\uf0ae\n\n\uf05d" metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/surface_energy.html:
+page_content="The radiation effect is not represented here\n  but can be added through the Film or Radiation options.\n  The section Surface Energy of chapter 6, Non Structural Procedure Library of \n  Marc Volume A: Theory and User Information provides\n  detailed information about the flux calculated in the 'Surface Energy' option.\n  The current help is a summary of this section. \n  It relates the Mentat variables names to the Marc Volume A variables names." metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/surface_energy.html', 'title': 'Surface_energy'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='ablation in order to obtain the total surface recession. Surface energy is coupled with the heat transfer into the material by the conductive heat flux, and possibly with the mass flow rate towards the surface due to water evaporation and/or thermal decomposition gases generated inside the material.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+----------------------------------SOURCE DOCUMENTS---------------------------
+==================================================
+
+
+> Question:
+How can surfaces recession be modelled?
+
+> Answer:
+
+Surfaces recession can be modelled in Marc using the Surface Recession option, which is available under the Job -> Analysis Option menu. The user can choose from three methods to model surface recession: simple, advanced, or user subroutine (uablate). In all cases, a recession rate is calculated and provides a nodal displacement normal to the surface, which is then projected to the chosen method based on the 'Normal' setting in the Analysis Option menu.
+
+The simple method involves directly entering a constant recession rate or retrieving it from a table (with units consistent with [m/s]). The advanced method allows for the distinction between ablation caused by external gases and erosion caused by mechanical effects, such as impacting particles. In this case, the user can enter mass flow rates of solid material being thermochemically or mechanically ablated, which are then divided by the mass density of the solid to obtain the recession rate (also with units consistent with [m/s]). The total recession is the sum of ablation due to external gases and impacting particles' erosion.
+
+The user subroutine (uablate) method allows for a customized recession rate input, using units consistent with [m/s].
+
+Regardless of which method is used, wherever the calculation of the recession rate takes place, a recession rate at the nodes is calculated, and the normal displacement is applied. The displacement can then be kept normal to the surface or projected to streamlines or side edges of surface elements. The chosen projection method depends on the 'Normal' setting in the Analysis Option menu.
+
+It's important to note that the direction of movement for surface nodes during recession should be specified using the RECEDING SURFACE option, which is available under the Job -> Analysis Option menu. Only surfaces defined with this option will experience node displacement during recession analysis. Additionally, it's crucial to ensure a suitable mesh since the recession projection depends on the mesh's streamline construction and pertinence.
+
+In summary, Marc provides three ways to model surface recession: simple, advanced, or user subroutine (uablate). The method used will depend on the specific application, such as rocket motor analyses for modelling ablation due to chemical effects or mechanical effects like erosion caused by impacting particles. Regardless of which method is chosen, a recession rate at the nodes is calculated and provides a normal displacement that can be projected based on the 'Normal' setting in the Analysis Option menu. The user must also specify surfaces for recession using the RECEDING SURFACE option and ensure a suitable mesh for proper projection of the recession.
+----------------------------------SOURCE DOCUMENTS---------------------------
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/recession.html:
+page_content='Surface_recession' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/recession.html', 'title': 'Surface_recession'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content="with a magnitude equal to the projection of the normal displacement to the side edge.\n\nCHAPTER 10 Nonstructural Procedure Library\n\nThe method to move the surface nodes as well as the location of the calculation of the surface recession are done in the Jobs -> Analysis Option menu via the 'Normal' and 'Recession Calculation' buttons respectively. Note that the recession rate calculation at nodes is recommended and prevents from interpolation/extrapolation errors.\n\nSimple Model\n\nThe recession rate\n\nS·\n\nis entered. It is unit consistent with [ms-1]\n\n811\n\n812 Marc Volume A: Theory and User Information\n\nAdvanced model: data from Surface Energy Balance\n\nIn the advanced model the recession is represented by:\n\n\uf06e A contribution representing the recession due to thermochemical effects called ablation\n\nS·\n\nth\n\n, and\n\n\uf06e A contribution representing the recession due to mechanical effects called erosion S·\n\nS·" metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/surface_energy.html:
+page_content="The Surface Energy option can also be used to define the recession\n  rate at the surface. Therefore, the 'Surface Recession Method' must be  \n  the 'Advanced Method'. Please refer to the section Surface Recession of chapter 6,\n  Non Structural Procedure Library of Marc Volume A: Theory and User Information\n  or the Marc Middle Mouse Help of the Surface Recession option  for more information.\n  The recession process is divided in two parts:\n  a thermochemical process called ablation and \n  a mechanical process called erosion.\n  The recession rate can be retrieved from:\n\nthe mass flow rate of the\n    thermochemically ablated surface material\n    by the action of external gases,\nthe mass flow rate of material thermochemically\n    ablated by the action of impacting particles,\nthe mass flow rate of material mechanically\n    eroded by the action of impacting particles." metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/surface_energy.html', 'title': 'Surface_energy'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content="\uf072v\uf028\n\n\uf029w\n\n\uf0e5+ 1\n\nm·\n\n1\n\n=\n\nB'C\uf061M m·\n\n+\n\ng m· +\n\n, s th p,\n\n=\n\nB'C\uf061M m·\n\n+\n\ng\n\n+\n\nfth g,\n\n\uf0e5\n\n, m·\n\nGth p j,\n\np j,\n\nSurface Recession Rate When the material undergoes surface recession a recession rate must be provided. There are 3 ways to do it.\n\nThe user can:\n\n\uf06e Directly enter a recession rate (simple method) or\n\n\uf06e Retrieve the recession rate from Surface Energy Balance data (advanced method) or\n\n\uf06e Enter a recession rate via the UABLATE user subroutine (user sub. uablate method)\n\nIn all cases a recession rate\n\nS·\n\nis calculated.\n\nThe recession rate can be evaluated either at the nodes or at the surface integration points (SFIP). When the evaluation of the recession rate is done at the SFIP, the code calculates a recession rate at the nodes by a weighted average of the SFIP values of the elements adjacent to the node.\n\nWherever the calculation of the recession rate takes place, a recession rate at the nodes is calculated and a displacement normal to the surface is provided." metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='There are seven aspects that control the receding surface calculation in Marc.\n\n1. Specifying which surfaces are to undergo recession.\n\nThe RECEDING SURFACE option is used to specify which surface is to be subjected to recession. For nodes that reside on elements edges (2-D) of faces (3-D) specified by the RECEDING SURFACE, the incremental displacement will be calculated during the recovery phase.\n\n2. Specifying the magnitude of the recession rate.\n\nThe recession rate is based upon either:\n\na. Simple model, that is either a constant, or evaluated by a table.\n\nb. Based upon the data given in the SURFACE ENERGY model definition block.\n\nc. Specified in UABLATE user subroutine.\n\n3. Specifying the direction of the movement of the nodes on the surface.\n\n815\n\n816 Marc Volume A: Theory and User Information' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/recession.html:
+page_content='Method\nSimple\nRecession Rate: Enter the rate of the normal recession to the surface.\n  The unit is consistent with [m.s-1].\n\n\nAdvanced\nSurface Energy: Select the Surface Energy the recession rate will be retrieved from.\nIn the advanced recession method a distinction is made between the\n  recession due to thermochemical reactions, called ablation, and the\n  recession due to mechanical effects, called erosion.\n  The total recession being the sum of the two.\nThe ablation of the material can have two origins in Marc: the external gases\n  and the impacting particles.\nThe erosion can be defined by the mass flow rate of solid\n  material eroded due to impacting particles or be defined\n  by a recession rate driven by the mass density\n  of the density in a process called intense erosion.\n  The two erosion models cannot be used simultaneously.\n\n\n\n\nAblation by external gases\n\n\n \n surface mass flow rate of thermochemically\n\t  ablated surface material by the action of external gases\n [kg.m-2.s-1]' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/recession.html', 'title': 'Surface_recession'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/strline_region.html:
+page_content="In a recession analysis using the stretch mesher or the multizone mesher \nto define the direction of the surface nodes displacement.\nWhen using these meshers the recession, which is defined by a boundary condition\nas a recession normal to the surface, is projected to the side edges of the elements following the streamline direction. \nIt is of prime importance to have a pertinent mesh as the latter drives \nthe streamlines construction and therefore the projection of the recession. \nMoreover the definition of the 'normal' used for recession must be set in the\nJob ➞ Analysis Option Menu at the value 'Streamlines (Projected)'.\n\nImportant remark: These two applications are independent of each other." metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/strline_region.html', 'title': 'strline_region'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/recession.html:
+page_content="Surface Recession\nThe Surface Recession option allows the user\n  to model the elimination of material at the surface.\n  This option is often used in rocket motor analyses\n  to model the ablation due to chemical effects \n  or the erosion due to mechanical effects.\nThree methods are available in Marc.\n  Two of them  (simple, user sub. uablate) use a\n  recession rate as input. The third one (advanced)\n  can retrieve the recession rate from mass\n  flow rates of solid material and/or recession rate\n  issued from the Surface Energy menu.\n In all cases, a recession rate is calculated in Marc and the latter \n  provides a nodal displacement normal to the surface.\n  Then, based on the method chosen in the\n  'Jobs &arr; Analysis Options' option to consider the Normal,\n  this nodal displacement is\n  \n either kept normal to the surface (\n      Receding Surfaces, Streamlines) methods) \n or projected to the streamlines\n      (Streamlines (projected) method)" metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/recession.html', 'title': 'Surface_recession'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/recession.html:
+page_content='The mass flow rates are divided by the mass density of the solid to obtain the recession rate:\n  [m.s-1]\nIn case of intense erosion the total recession rate is:\n  [m.s-1]\nAll terms used in the advanced recession method are defined\n  in the section Surface Energy and Surface Recession of chapter 6, \n  Non Structural Procedure Library of \n  Marc Volume A: Theory and User Information.\n\nUser Sub. Uablate\nWith the uablate user subroutine the user can enter a recession rate.\n  The unit is consistent with [m.s-1].' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/recession.html', 'title': 'Surface_recession'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='Wherever the calculation of the recession rate takes place, a recession rate at the nodes is calculated and a displacement normal to the surface is provided.\n\nThis normal displacement can then be:\n\n\uf06e Kept normal to the surface: the normal considered to move a node is the average of edge/surface normal of all elements this node belongs to. The surface node is moved along this average normal with a distance equal to S·\n\nt\uf044\uf0b4\n\nt\uf044\n\n, with time step\n\n.\n\n\uf06e Projected to the streamlines: the surface node is moved along the streamline with a magnitude equal to the\n\nprojection of the normal displacement to the streamline.\n\n\uf06e Projected to the side edges of the surface element: the surface nodes are moved in the direction of the side edges\n\nwith a magnitude equal to the projection of the normal displacement to the side edge.\n\nCHAPTER 10 Nonstructural Procedure Library' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+----------------------------------SOURCE DOCUMENTS---------------------------
+==================================================
+
+
+> Question:
+What kind of meshers can be used when modelling surface recession?
+
+> Answer:
+
+There are several meshers that can be used when modelling surface recession in Marc:
+
+1. Relax mesher: Improves the mesh by shifting nodes, available for both 2-D and 3-D solids.
+
+2. Shave mesher: Deletes layers of a region where recession takes place, available for both 2-D and 3-D solids.
+
+3. Stretch mesher: Available for both 2-D and 3-D solids.
+
+4. Multi-zone mesher: Special mesher for streamline regions, available for both 2-D and 3-D solids.
+
+5. Overlay hexahedral mesher: Limited capabilities, available only for 3-D solids.
+
+When using higher order elements during recession analysis, two considerations are made: the midside node on the surface is positioned such that the surface geometry is linear within and element, bi-linear for 3-D geometries; and the remeshing process itself is based upon using lower order elements, and the midside nodes are then repositioned to the midpoints.
+
+For shell analysis, the Patran MOM (Mesh on Mesh) surface mesher can be used, which supports both triangles and quadrilaterals with full support for mesh density control and geometry preservation including hard and soft entities. This mesher also has full support for loads and boundary conditions that can be applied to the interior of the mesh, but it does not support trimming and crack propagation.
+
+When using the MoM (Mesh on Mesh) mesher for quadrilateral analysis, it may create some triangles, which are treated as collapsed quadrilaterals. 
+
+In summary, a variety of meshers can be used when modelling surface recession in Marc, with varying capabilities and limitations depending on the type of analysis being performed.
+----------------------------------SOURCE DOCUMENTS---------------------------
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='Either mesher may be used with either lower order or higher order elements for both 2-D and 3-D problems. When using higher order elements, two considerations are made.\n\na. During the recession itself the midside node on the surface is positioned such that the surface geometry is linear within and element, bi-linear for 3-D geometries. While this is not strictly consistent with the idea of higher order elements, it resulted in less distortion problems. Temperature fields are still quadratic. The midside nodes on the edges perpendicular to the surface that are in the interior of the element are adjusted such that they are mid-edge. This was done to make sure the quadratic shape functions did not break down.\n\nb. The remeshing process itself is based upon using lower order elements, and the midside nodes are then\n\nrepositioned to the midpoints.\n\n7. Region geometry.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/strline_region.html:
+page_content="In a recession analysis using the stretch mesher or the multizone mesher \nto define the direction of the surface nodes displacement.\nWhen using these meshers the recession, which is defined by a boundary condition\nas a recession normal to the surface, is projected to the side edges of the elements following the streamline direction. \nIt is of prime importance to have a pertinent mesh as the latter drives \nthe streamlines construction and therefore the projection of the recession. \nMoreover the definition of the 'normal' used for recession must be set in the\nJob ➞ Analysis Option Menu at the value 'Streamlines (Projected)'.\n\nImportant remark: These two applications are independent of each other." metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/strline_region.html', 'title': 'strline_region'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='b. The remeshing process itself is based upon using lower order elements, and the midside nodes are then\n\nrepositioned to the midpoints.\n\n7. Region geometry.\n\nFor the streamline model the element edges normal to the surface in theory should follow the streamline behavior; i.e., be normal to the surface. This is also advantageous from a surface recession perspective. When the recession, which by default is normal to the surface, is not aligned with the element edges, addition mesh distortion occurs. To overcome this problem a projection procedure can be requested. This is only available in conjunction with the shaver mesher, and is still not as good as creating a good mesh to begin with. It is highly advantageous to have initially a good mesh.\n\nExamples\n\n1. Axisymmetric analysis with edges not perpendicular to surface). This is an example of a nonoptimal meshing technique because the element edges are not perpendicular to the surface.\n\nCHAPTER 10 Nonstructural Procedure Library' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='The Advancing Front and Delaunay meshers support loads and boundary conditions on the outline, but they have limitations in the geometry preservation and they do not support the general mesh density control. There are some limited capabilities for mesh density control, with curvature control and refinement boxes. They are currently the only 2-D meshers that support trimming and crack propagation.\n\nMarc has a so-called overlay mesher, but it only has limited capabilities. The mesh quality is often poor, and it does not support holes in the body or boundary conditions.\n\nThere are a number of mesh generators primarily targeted for the analysis of recession in a thermal analysis of pyrolysis and similar phenomena. These are as follows:\n\n665\n\n666 Marc Volume A: Theory and User Information\n\n\uf06e Relax mesher: The mesh is improved by shifting nodes. Also available for 3-D solids. A user subroutine' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/recession.html:
+page_content='Surface_recession' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/recession.html', 'title': 'Surface_recession'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='665\n\n666 Marc Volume A: Theory and User Information\n\n\uf06e Relax mesher: The mesh is improved by shifting nodes. Also available for 3-D solids. A user subroutine\n\nUREMESH_RELAX is available for shifting the nodes. Marc Volume D: User Subroutines and Special Routines gives details about the usage of this routine.\n\n\uf06e Shave mesher: Elements are deleted by shaving off layer by layer of a region where recession takes place. Also\n\navailable for 3-D solids.\n\n\uf06e Stretch mesher: Also available for 3-D solids. \uf06e Multi-zone mesher: Special mesher for streamline regions.\n\nShell Meshers\n\nShell meshing is done using the Patran MOM (Mesh on Mesh) surface mesher. This mesher supports triangles and quadrilaterals and has full support for mesh density control.\n\n3-D Solid Meshers\n\nThere is an overlay hexahedral mesher available in Marc but it has limited capabilities. Boundary conditions are not supported, the mesh quality is not always good and it has limited mesh density control.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='There are seven aspects that control the receding surface calculation in Marc.\n\n1. Specifying which surfaces are to undergo recession.\n\nThe RECEDING SURFACE option is used to specify which surface is to be subjected to recession. For nodes that reside on elements edges (2-D) of faces (3-D) specified by the RECEDING SURFACE, the incremental displacement will be calculated during the recovery phase.\n\n2. Specifying the magnitude of the recession rate.\n\nThe recession rate is based upon either:\n\na. Simple model, that is either a constant, or evaluated by a table.\n\nb. Based upon the data given in the SURFACE ENERGY model definition block.\n\nc. Specified in UABLATE user subroutine.\n\n3. Specifying the direction of the movement of the nodes on the surface.\n\n815\n\n816 Marc Volume A: Theory and User Information' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content='Meshing Techniques\n\n2-D Solid Meshers\n\n2-D meshing can be done for both triangles and quadrilaterals. The main mesh generator is the MoM (Mesh on Mesh) mesher, which supports both triangles and quadrilaterals. For quadrilateral meshes it may create some triangles, and they will be treated as collapsed quadrilaterals. This mesher has full support for the general mesh density control described below, as well as the geometry preservation including hard and soft entities. It also has full support of loads and boundary conditions, which can also be applied to the interior of the mesh. Current limitations are that it does not support trimming and crack propagation.' metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf:
+page_content="with a magnitude equal to the projection of the normal displacement to the side edge.\n\nCHAPTER 10 Nonstructural Procedure Library\n\nThe method to move the surface nodes as well as the location of the calculation of the surface recession are done in the Jobs -> Analysis Option menu via the 'Normal' and 'Recession Calculation' buttons respectively. Note that the recession rate calculation at nodes is recommended and prevents from interpolation/extrapolation errors.\n\nSimple Model\n\nThe recession rate\n\nS·\n\nis entered. It is unit consistent with [ms-1]\n\n811\n\n812 Marc Volume A: Theory and User Information\n\nAdvanced model: data from Surface Energy Balance\n\nIn the advanced model the recession is represented by:\n\n\uf06e A contribution representing the recession due to thermochemical effects called ablation\n\nS·\n\nth\n\n, and\n\n\uf06e A contribution representing the recession due to mechanical effects called erosion S·\n\nS·" metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/vola.pdf'}
+>>>>>>>>>>
+<<<<<<<<<<
+/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/surface_energy.html:
+page_content="The Surface Energy option can also be used to define the recession\n  rate at the surface. Therefore, the 'Surface Recession Method' must be  \n  the 'Advanced Method'. Please refer to the section Surface Recession of chapter 6,\n  Non Structural Procedure Library of Marc Volume A: Theory and User Information\n  or the Marc Middle Mouse Help of the Surface Recession option  for more information.\n  The recession process is divided in two parts:\n  a thermochemical process called ablation and \n  a mechanical process called erosion.\n  The recession rate can be retrieved from:\n\nthe mass flow rate of the\n    thermochemically ablated surface material\n    by the action of external gases,\nthe mass flow rate of material thermochemically\n    ablated by the action of impacting particles,\nthe mass flow rate of material mechanically\n    eroded by the action of impacting particles." metadata={'source': '/workspaces/localGPT/SOURCE_DOCUMENTS/mmhelp_pyrolysis/surface_energy.html', 'title': 'Surface_energy'}
+>>>>>>>>>>
+----------------------------------SOURCE DOCUMENTS---------------------------
+==================================================

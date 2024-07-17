@@ -169,3 +169,6 @@ cython_debug/
 SOURCE_DOCUMENTS/.DS_Store
 SOURCE_DOCUMENTS/
 backup_docs/
+
+DB*/
+venv*/

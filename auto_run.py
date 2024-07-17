@@ -122,7 +122,8 @@ def retrieval_qa_pipline(device_type, use_history, promptTemplate_type="llama"):
     # load the vectorstore
     db = Chroma(persist_directory=PERSIST_DIRECTORY, embedding_function=embeddings, client_settings=CHROMA_SETTINGS)
     # retriever = db.as_retriever(search_kwargs={"k": 10, "lambda_mult": 0.25, "score_threshold": 0.8})
-    retriever = db.as_retriever()
+    retriever = db.as_retriever(search_kwargs={"k": 10, "lambda_mult": 0.25})
+    # retriever = db.as_retriever()
 
     # get the prompt template and memory if set by the user.
     prompt, memory = get_prompt_template(promptTemplate_type=promptTemplate_type, history=use_history)
@@ -235,12 +236,29 @@ def main(device_type, show_sources, use_history, model_type):
 
     qa = retrieval_qa_pipline(device_type, use_history, promptTemplate_type=model_type)
     # Interactive questions and answers
-    while True:
-        query = input("\nEnter a query: ")
-        if query == "exit":
-            break
+
+    # preamble = 'Answer the following question at two levels of details: a single sentence summary and an in depth explanation.'
+
+    questions_list = ['What is pyrolysis?',
+                      'What is the Streamline Pyrolysis Model?',
+                      'How is the Streamline Pyrolysis Model supported in Marc-Mentat?',
+                      'How can Water Evaporation be handled in the Streamline Pyrolysis model?',
+                      'How can Coking be handled in the Streamline Pyrolysis model?',
+                      'What is formulation of the Surface Energy Balance?',
+                      'How can surfaces recession be modelled?',
+                      'What kind of meshers can be used when modelling surface recession?']
+
+    for query in questions_list:
+        # query = input("\nEnter a query: ")
+        # if query == "exit":
+        #     break
         # Get the answer from the chain
+
+        # full_query = preamble + '\n' + query
+        # res = qa(full_query)
+
         res = qa(query)
+
         answer, docs = res["result"], res["source_documents"]
 
         # Print the result
@@ -253,14 +271,20 @@ def main(device_type, show_sources, use_history, model_type):
             # # Print the relevant sources used for the answer
             print("----------------------------------SOURCE DOCUMENTS---------------------------")
             for document in docs:
-                print("\n> " + document.metadata["source"] + ":")
-                print(document.page_content)
+                print('<'*10)
+                print(document.metadata["source"] + ":")
                 print(document)
+                print('>'*10)
+                # print(document.page_content)
             print("----------------------------------SOURCE DOCUMENTS---------------------------")
+        
+        print('='*50, flush=True)
 
 
 if __name__ == "__main__":
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(filename)s:%(lineno)s - %(message)s", level=logging.INFO
     )
-    main()
+    import sys
+    with open('output.txt', 'a') as sys.stdout:
+        main()

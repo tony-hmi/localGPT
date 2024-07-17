@@ -1,0 +1,4 @@
+FROM nvidia/cuda:12.1.1-runtime-ubuntu22.04
+RUN apt-get update && apt-get install -y software-properties-common
+RUN apt-get install -y g++-11 make python3 python-is-python3 pip
+# RUN CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install -r req_devcont.txt
